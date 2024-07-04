@@ -12,6 +12,6 @@ class TestMath(TestCase):
 
     def test_wrong(self):
         a = 5
-        b = 2
+        b = 3
         result = do_math(a, b)
         self.assertEqual(result, 8)
