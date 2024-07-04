@@ -26,7 +26,31 @@ jobs:
             - name: Install Dependencies
               run: |
                 python -m pip install --upgrade pip
+                pip install -r requirements.txt
             - name: Lint with flake8
               run: |
                 pip install flake8
-                flake8 .
+                flake8 ./new_app
+    test:
+        name: Tests
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+            - name: Set up Python 3.12
+              uses: actions/setup-python@v2
+              with:
+                python-version: '3.12'
+            - name: Install Dependencies
+              run: |
+                python -m pip install --upgrade pip
+                pip install -r requirements.txt
+                pip install coverage
+                pip install django-coverage-plugin
+            - name: Test run
+              run: |
+                python manage.py test
+            - name: Test coverage
+              run: |
+                coverage run --source='.' manage.py test
+                coverage report -m

@@ -1,3 +1,2 @@
-from django.shortcuts import render
-
-# Create your views here.
+def do_math(a, b):
+    return a+b
